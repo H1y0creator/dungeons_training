@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://dlyk26i3jsdpr"]
+
+[ext_resource type="Script" uid="uid://3ww3dnn2ahe0" path="res://ui/pause_menu.gd" id="1_ejwgg"]
+[ext_resource type="PackedScene" uid="uid://ubqwoksj4g5v" path="res://ui/sound_button.tscn" id="3_npydk"]
+
+[sub_resource type="Animation" id="Animation_ejwgg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fob5h"]
+resource_name = "default"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_avurv"]
+_data = {
+&"RESET": SubResource("Animation_ejwgg"),
+&"default": SubResource("Animation_fob5h")
+}
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=3259817]
+process_mode = 3
+script = ExtResource("1_ejwgg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=178291877]
+root_node = NodePath("../ColorRect")
+libraries/ = SubResource("AnimationLibrary_avurv")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=67758481]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.60784316, 0.29803923, 0.6392157, 0.54509807)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=672832793]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1529830128]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 140)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1333237042]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=38174977]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=784803544]
+layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=64986333]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResumeButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=645977083 instance=ExtResource("3_npydk")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="OptionsButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1470908703 instance=ExtResource("3_npydk")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1276336374 instance=ExtResource("3_npydk")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit to menu"
